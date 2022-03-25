@@ -18,5 +18,10 @@ gcloud iam service-accounts keys create key-file.json \
 
 # Setup secret in Github
 create a JSON key that you can download. Encode it to Base 64 (for example by using base64 -i /path/to/your/key-file.json in your terminal).
-Then go to your Github repository secrets and add the base64-encoded string as a new secret named GOOGLE_APPLICATION_CREDENTIALS
+Then go to your Github repository secrets and add the base64-encoded string as a new secret named GCP_SA_KEY
+
+# need to create another secret for terraform, it doesn't use base64 version of the key file
+# use this command to convert \n to a space ' ' 
+tr '\n' ' ' < key-file.json
+# copy/paste the one-line version of key-file.json content to another Github secret called GOOGLE_CREDENTIALS
 ```
