@@ -27,8 +27,6 @@ jobs:
 
     - name: 'Set up Cloud SDK'
       uses: 'google-github-actions/setup-gcloud@v0'
-      with:
-        export_default_credentials: true
 
     - name: 'Use gcloud CLI'
       run: 'gcloud info'
@@ -40,15 +38,15 @@ jobs:
     - name: Terraform Init
       run: terraform init
       env:
-        GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
     - name: Terraform Plan
       run: terraform plan
       env:
-        GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply
       env:
-        GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
